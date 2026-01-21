@@ -2,6 +2,9 @@
 
 Quarterly capsule planner + "Should I buy this?" AI decision assistant.
 
+![CapsuleOS Demo](docs/demo.gif)
+*Demo coming soon - placeholder for app screenshots*
+
 ## What it does
 
 CapsuleOS helps you plan a cohesive quarterly capsule wardrobe and avoid low-value purchases by scoring items for:

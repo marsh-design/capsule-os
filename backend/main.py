@@ -18,7 +18,7 @@ load_dotenv()
 app = FastAPI(
     title="CapsuleOS API",
     description="Quarterly capsule wardrobe planner and purchase decision assistant",
-    version="0.1.0"
+    version="0.1.0",
 )
 
 # CORS middleware
@@ -53,13 +53,10 @@ async def root():
 @app.get("/api/health")
 async def health():
     """Detailed health check"""
-    return {
-        "status": "healthy",
-        "version": "0.1.0",
-        "database": "connected"
-    }
+    return {"status": "healthy", "version": "0.1.0", "database": "connected"}
 
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)

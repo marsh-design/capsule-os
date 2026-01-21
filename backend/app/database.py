@@ -2,7 +2,16 @@
 Database configuration and initialization
 """
 
-from sqlalchemy import create_engine, Column, Integer, String, Float, JSON, DateTime, Text
+from sqlalchemy import (
+    create_engine,
+    Column,
+    Integer,
+    String,
+    Float,
+    JSON,
+    DateTime,
+    Text,
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
@@ -21,7 +30,7 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     preferences = Column(JSON)  # Store user preferences
@@ -29,7 +38,7 @@ class User(Base):
 
 class ClosetItem(Base):
     __tablename__ = "closet_items"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, index=True)
     brand = Column(String)
@@ -42,7 +51,7 @@ class ClosetItem(Base):
 
 class Product(Base):
     __tablename__ = "products"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     brand = Column(String, index=True)
     name = Column(String)
@@ -57,7 +66,7 @@ class Product(Base):
 
 class Review(Base):
     __tablename__ = "reviews"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer, index=True)
     rating = Column(Integer)  # 1-5
@@ -68,7 +77,7 @@ class Review(Base):
 
 class ReviewInsight(Base):
     __tablename__ = "review_insights"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer, index=True)
     fit_signal = Column(String)  # "runs small", "runs large", "true to size"

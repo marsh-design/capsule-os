@@ -14,7 +14,7 @@ def test_capsule_scorer_palette_match():
         {"colors": ["navy", "gray"]},
     ]
     palette = ["black", "navy", "cream"]
-    
+
     score = scorer._score_palette_match(items, palette)
     assert 0 <= score <= 1
 
@@ -27,7 +27,7 @@ def test_capsule_scorer_versatility():
         {"category": "jeans"},
         {"category": "blazer"},
     ]
-    
+
     score = scorer._score_versatility(items)
     assert 0 <= score <= 1
 

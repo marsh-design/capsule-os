@@ -16,17 +16,17 @@ router = APIRouter()
 async def upload_closet(
     items: List[Dict[str, Any]],
     user_id: int = 1,  # TODO: Get from auth
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Upload closet items
     """
     try:
         logger.info(f"Uploading {len(items)} closet items for user {user_id}")
-        
+
         # Clear existing items (for MVP, single user)
         db.query(ClosetItem).filter(ClosetItem.user_id == user_id).delete()
-        
+
         # Add new items
         for item in items:
             closet_item = ClosetItem(
@@ -35,10 +35,10 @@ async def upload_closet(
                 category=item.get("category"),
                 color=item.get("color"),
                 description=item.get("description"),
-                price=item.get("price", 0.0)
+                price=item.get("price", 0.0),
             )
             db.add(closet_item)
-        
+
         db.commit()
         return {"status": "success", "items_uploaded": len(items)}
     except Exception as e:
@@ -49,8 +49,7 @@ async def upload_closet(
 
 @router.get("/")
 async def get_closet(
-    user_id: int = 1,  # TODO: Get from auth
-    db: Session = Depends(get_db)
+    user_id: int = 1, db: Session = Depends(get_db)  # TODO: Get from auth
 ):
     """
     Get user's closet items
@@ -65,7 +64,7 @@ async def get_closet(
                     "category": item.category,
                     "color": item.color,
                     "description": item.description,
-                    "price": item.price
+                    "price": item.price,
                 }
                 for item in items
             ]

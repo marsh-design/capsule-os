@@ -17,16 +17,18 @@ async def analyze_item(request: AnalyzeItemRequest):
     Analyze a product and provide purchase recommendation
     """
     try:
-        logger.info(f"Analyzing item: {request.product_link or request.product_description}")
-        
+        logger.info(
+            f"Analyzing item: {request.product_link or request.product_description}"
+        )
+
         analysis = await item_analyzer.analyze(
             product_link=request.product_link,
             product_description=request.product_description,
             price=request.price,
             brand=request.brand,
-            user_id=request.user_id
+            user_id=request.user_id,
         )
-        
+
         return analysis
     except Exception as e:
         logger.error(f"Error analyzing item: {str(e)}")

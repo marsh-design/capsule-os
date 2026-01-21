@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "brand": "Everlane",
+    "name": "The Perfect Vintage Crew",
+    "category": "Top",
+    "price": 28.0,
+    "description": "Classic crew neck t-shirt in organic cotton",
+    "colors": ["white", "black", "navy", "gray"],
+    "image_url": "https://example.com/everlane-crew.jpg",
+    "metadata": {
+      "material": "organic_cotton",
+      "care": "machine_wash",
+      "fit": "relaxed"
+    }
+  },
+  {
+    "id": 2,
+    "brand": "Aritzia",
+    "name": "Babaton Contour Bodysuit",
+    "category": "Top",
+    "price": 48.0,
+    "description": "Sleek bodysuit with snap closure",
+    "colors": ["black", "white", "brown"],
+    "image_url": "https://example.com/aritzia-bodysuit.jpg",
+    "metadata": {
+      "material": "nylon_spandex",
+      "care": "hand_wash",
+      "fit": "fitted"
+    }
+  },
+  {
+    "id": 3,
+    "brand": "Zara",
+    "name": "Basic Trench Coat",
+    "category": "Outerwear",
+    "price": 89.0,
+    "description": "Classic trench coat in beige",
+    "colors": ["beige", "black", "navy"],
+    "image_url": "https://example.com/zara-trench.jpg",
+    "metadata": {
+      "material": "polyester_cotton",
+      "care": "dry_clean",
+      "fit": "oversized"
+    }
+  },
+  {
+    "id": 4,
+    "brand": "Everlane",
+    "name": "The Authentic Stretch Jean",
+    "category": "Bottom",
+    "price": 78.0,
+    "description": "Classic straight-leg jean with stretch",
+    "colors": ["blue", "black", "white"],
+    "image_url": "https://example.com/everlane-jean.jpg",
+    "metadata": {
+      "material": "cotton_elastane",
+      "care": "machine_wash",
+      "fit": "straight"
+    }
+  },
+  {
+    "id": 5,
+    "brand": "Aritzia",
+    "name": "Wilfred Free Go-To Pant",
+    "category": "Bottom",
+    "price": 88.0,
+    "description": "Relaxed wide-leg pant in linen blend",
+    "colors": ["beige", "black", "sage", "tan"],
+    "image_url": "https://example.com/aritzia-pant.jpg",
+    "metadata": {
+      "material": "linen_viscose",
+      "care": "machine_wash",
+      "fit": "wide_leg"
+    }
+  },
+  {
+    "id": 6,
+    "brand": "Everlane",
+    "name": "The Day Heel",
+    "category": "Shoes",
+    "price": 145.0,
+    "description": "Classic pointed-toe heel",
+    "colors": ["black", "nude", "red"],
+    "image_url": "https://example.com/everlane-heel.jpg",
+    "metadata": {
+      "material": "leather",
+      "care": "polish",
+      "fit": "true_to_size"
+    }
+  },
+  {
+    "id": 7,
+    "brand": "Zara",
+    "name": "Leather Ankle Boot",
+    "category": "Shoes",
+    "price": 79.0,
+    "description": "Classic ankle boot with block heel",
+    "colors": ["black", "brown", "tan"],
+    "image_url": "https://example.com/zara-boot.jpg",
+    "metadata": {
+      "material": "synthetic_leather",
+      "care": "wipe_clean",
+      "fit": "true_to_size"
+    }
+  },
+  {
+    "id": 8,
+    "brand": "Aritzia",
+    "name": "Babaton Slip Midi Dress",
+    "category": "Dress",
+    "price": 98.0,
+    "description": "Elegant slip dress in satin",
+    "colors": ["black", "navy", "burgundy"],
+    "image_url": "https://example.com/aritzia-dress.jpg",
+    "metadata": {
+      "material": "polyester",
+      "care": "dry_clean",
+      "fit": "fitted"
+    }
+  },
+  {
+    "id": 9,
+    "brand": "Everlane",
+    "name": "The ReNew Transit Backpack",
+    "category": "Accessory",
+    "price": 68.0,
+    "description": "Sustainable backpack made from recycled materials",
+    "colors": ["black", "navy", "gray"],
+    "image_url": "https://example.com/everlane-backpack.jpg",
+    "metadata": {
+      "material": "recycled_polyester",
+      "care": "spot_clean",
+      "fit": "one_size"
+    }
+  },
+  {
+    "id": 10,
+    "brand": "Zara",
+    "name": "Oversized Blazer",
+    "category": "Outerwear",
+    "price": 69.0,
+    "description": "Classic oversized blazer",
+    "colors": ["black", "navy", "beige", "gray"],
+    "image_url": "https://example.com/zara-blazer.jpg",
+    "metadata": {
+      "material": "polyester_wool",
+      "care": "dry_clean",
+      "fit": "oversized"
+    }
+  }
+]

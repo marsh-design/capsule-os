@@ -1,0 +1,78 @@
+{
+  "Q1": {
+    "palette": ["black", "navy", "cream", "camel", "gray", "burgundy"],
+    "items": [
+      "trench_coat",
+      "wool_coat",
+      "sweater",
+      "jeans",
+      "boots",
+      "scarf",
+      "turtleneck",
+      "blazer",
+      "trousers",
+      "loafers",
+      "bag",
+      "belt"
+    ],
+    "climate": "cold",
+    "style_keywords": ["elevated", "classic"]
+  },
+  "Q2": {
+    "palette": ["white", "beige", "sage", "denim", "tan", "khaki"],
+    "items": [
+      "blazer",
+      "tee",
+      "trousers",
+      "sneakers",
+      "tote",
+      "cardigan",
+      "midi_dress",
+      "sandals",
+      "linen_shirt",
+      "wide_leg_pants",
+      "crossbody",
+      "sunglasses"
+    ],
+    "climate": "moderate",
+    "style_keywords": ["effortless", "minimal"]
+  },
+  "Q3": {
+    "palette": ["white", "navy", "coral", "yellow", "denim", "tan"],
+    "items": [
+      "sundress",
+      "sandals",
+      "shorts",
+      "tank",
+      "hat",
+      "tote",
+      "linen_pants",
+      "sneakers",
+      "kimono",
+      "bikini",
+      "coverup",
+      "sunglasses"
+    ],
+    "climate": "warm",
+    "style_keywords": ["effortless", "sexy"]
+  },
+  "Q4": {
+    "palette": ["black", "burgundy", "camel", "cream", "gray", "navy"],
+    "items": [
+      "wool_coat",
+      "sweater",
+      "jeans",
+      "boots",
+      "scarf",
+      "blazer",
+      "turtleneck",
+      "trousers",
+      "loafers",
+      "bag",
+      "gloves",
+      "hat"
+    ],
+    "climate": "cold",
+    "style_keywords": ["elevated", "classic"]
+  }
+}

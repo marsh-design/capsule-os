@@ -1,0 +1,42 @@
+{
+  "products": {
+    "id": "integer (primary key)",
+    "brand": "string (indexed)",
+    "name": "string",
+    "category": "string (indexed)",
+    "price": "float",
+    "description": "text",
+    "colors": "array of strings",
+    "image_url": "string",
+    "metadata": "json object",
+    "created_at": "datetime"
+  },
+  "reviews": {
+    "id": "integer (primary key)",
+    "product_id": "integer (foreign key, indexed)",
+    "rating": "integer (1-5)",
+    "text": "text",
+    "reviewer_info": "json object (size, height, etc.)",
+    "created_at": "datetime"
+  },
+  "review_insights": {
+    "id": "integer (primary key)",
+    "product_id": "integer (foreign key, indexed)",
+    "fit_signal": "string (runs small/large/true to size)",
+    "quality_score": "float (0-1)",
+    "fabric_quality": "string",
+    "common_complaints": "array of strings",
+    "review_sentiment": "float (0-1)",
+    "extracted_at": "datetime"
+  },
+  "closet_items": {
+    "id": "integer (primary key)",
+    "user_id": "integer (indexed)",
+    "brand": "string",
+    "category": "string",
+    "color": "string",
+    "description": "text",
+    "price": "float",
+    "created_at": "datetime"
+  }
+}

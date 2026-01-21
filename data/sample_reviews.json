@@ -1,0 +1,134 @@
+[
+  {
+    "product_id": 1,
+    "rating": 5,
+    "text": "Love this tee! True to size, soft fabric, and holds up well after many washes. Perfect basic.",
+    "reviewer_info": {"size": "M", "height": "5'6\""}
+  },
+  {
+    "product_id": 1,
+    "rating": 4,
+    "text": "Great quality for the price. Slightly oversized which I like. Color is true to photos.",
+    "reviewer_info": {"size": "S", "height": "5'4\""}
+  },
+  {
+    "product_id": 1,
+    "rating": 3,
+    "text": "Fabric is a bit thin and see-through in white. Size runs slightly large.",
+    "reviewer_info": {"size": "M", "height": "5'7\""}
+  },
+  {
+    "product_id": 2,
+    "rating": 5,
+    "text": "Perfect fit! So flattering and comfortable. True to size, great quality.",
+    "reviewer_info": {"size": "S", "height": "5'5\""}
+  },
+  {
+    "product_id": 2,
+    "rating": 4,
+    "text": "Love the style but runs a bit small. Size up if between sizes. Fabric is nice quality.",
+    "reviewer_info": {"size": "M", "height": "5'8\""}
+  },
+  {
+    "product_id": 2,
+    "rating": 2,
+    "text": "Fabric pills after a few wears. Not worth the price. Also runs small.",
+    "reviewer_info": {"size": "XS", "height": "5'3\""}
+  },
+  {
+    "product_id": 3,
+    "rating": 4,
+    "text": "Classic trench, good quality for the price. Runs true to size. Love the beige color.",
+    "reviewer_info": {"size": "M", "height": "5'6\""}
+  },
+  {
+    "product_id": 3,
+    "rating": 3,
+    "text": "Fabric feels a bit cheap and wrinkles easily. But it's a good basic for the price.",
+    "reviewer_info": {"size": "S", "height": "5'4\""}
+  },
+  {
+    "product_id": 4,
+    "rating": 5,
+    "text": "Best jeans ever! Perfect fit, true to size, comfortable stretch. Worth every penny.",
+    "reviewer_info": {"size": "28", "height": "5'7\""}
+  },
+  {
+    "product_id": 4,
+    "rating": 4,
+    "text": "Great quality jeans. Runs slightly large in waist. Fabric is durable.",
+    "reviewer_info": {"size": "27", "height": "5'5\""}
+  },
+  {
+    "product_id": 5,
+    "rating": 5,
+    "text": "Love these pants! So comfortable and versatile. True to size, great fabric.",
+    "reviewer_info": {"size": "4", "height": "5'6\""}
+  },
+  {
+    "product_id": 5,
+    "rating": 3,
+    "text": "Fabric wrinkles a lot and is see-through in lighter colors. Cute style though.",
+    "reviewer_info": {"size": "6", "height": "5'8\""}
+  },
+  {
+    "product_id": 6,
+    "rating": 5,
+    "text": "Beautiful heels, very comfortable for all-day wear. True to size, great quality leather.",
+    "reviewer_info": {"size": "8", "height": "5'6\""}
+  },
+  {
+    "product_id": 6,
+    "rating": 4,
+    "text": "Love the style but runs slightly narrow. Size up if you have wide feet.",
+    "reviewer_info": {"size": "7.5", "height": "5'5\""}
+  },
+  {
+    "product_id": 7,
+    "rating": 3,
+    "text": "Cute boots but quality is just okay. Synthetic leather shows wear quickly.",
+    "reviewer_info": {"size": "8", "height": "5'7\""}
+  },
+  {
+    "product_id": 7,
+    "rating": 4,
+    "text": "Good value for the price. Comfortable, true to size. Perfect for everyday.",
+    "reviewer_info": {"size": "7", "height": "5'4\""}
+  },
+  {
+    "product_id": 8,
+    "rating": 5,
+    "text": "Stunning dress! Perfect fit, beautiful fabric. True to size, very flattering.",
+    "reviewer_info": {"size": "S", "height": "5'6\""}
+  },
+  {
+    "product_id": 8,
+    "rating": 4,
+    "text": "Love the style but fabric is delicate. Runs slightly small, consider sizing up.",
+    "reviewer_info": {"size": "M", "height": "5'8\""}
+  },
+  {
+    "product_id": 9,
+    "rating": 5,
+    "text": "Great backpack! Durable, spacious, and love that it's made from recycled materials.",
+    "reviewer_info": {}
+  },
+  {
+    "product_id": 9,
+    "rating": 4,
+    "text": "Good quality backpack. Straps could be more padded but overall happy with purchase.",
+    "reviewer_info": {}
+  },
+  {
+    "product_id": 10,
+    "rating": 4,
+    "text": "Nice blazer for the price. Fabric is decent, fits oversized as described.",
+    "reviewer_info": {"size": "S", "height": "5'6\""}
+  },
+  {
+    "product_id": 10,
+    "rating": 3,
+    "text": "Fabric wrinkles easily and feels a bit cheap. But it's a good basic blazer.",
+    "reviewer_info": {"size": "M", "height": "5'7\""}
+  }
+]

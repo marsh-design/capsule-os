@@ -2,9 +2,7 @@
 Scoring services for capsule coherence and item evaluation
 """
 
-from loguru import logger
 from typing import Dict, Any, List, Optional
-import numpy as np
 
 
 class CapsuleScorer:

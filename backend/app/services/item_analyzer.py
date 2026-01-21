@@ -6,8 +6,7 @@ from loguru import logger
 from app.models import AnalyzeItemRequest, AnalyzeItemResponse, Verdict
 from app.services.review_analyzer import ReviewAnalyzer
 from app.services.scoring import ItemScorer
-from typing import Optional, Dict, Any
-import httpx
+from typing import Optional, Dict, Any, List, Tuple
 
 
 class ItemAnalyzer:
@@ -99,10 +98,10 @@ class ItemAnalyzer:
             return Verdict.SKIP
     
     def _generate_pros_cons(
-        self, 
-        score_result: Dict[str, Any], 
+        self,
+        score_result: Dict[str, Any],
         review_insights: Optional[Dict[str, Any]]
-    ) -> tuple[list[str], list[str]]:
+    ) -> Tuple[List[str], List[str]]:
         """Generate pros and cons list"""
         pros = []
         cons = []

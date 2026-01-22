@@ -60,7 +60,7 @@ class Product(Base):
     description = Column(Text)
     colors = Column(JSON)  # Array of colors
     image_url = Column(String)
-    metadata = Column(JSON)  # Additional product data
+    product_metadata = Column(JSON)  # Additional product data (renamed from metadata)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 

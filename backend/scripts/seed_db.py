@@ -32,7 +32,7 @@ def seed_products(db: Session, products_data: list):
             description=product_data["description"],
             colors=product_data["colors"],
             image_url=product_data.get("image_url"),
-            metadata=product_data.get("metadata", {}),
+            product_metadata=product_data.get("metadata", {}),
         )
         db.add(product)
     db.commit()

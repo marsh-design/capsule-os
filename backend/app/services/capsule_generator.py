@@ -31,12 +31,27 @@ class CapsuleGenerator:
 
     def _load_templates(self):
         """Load capsule templates"""
-        try:
-            with open(self.templates_path, "r") as f:
-                self.templates = json.load(f)
-        except FileNotFoundError:
-            logger.warning(f"Templates file not found: {self.templates_path}")
-            self.templates = self._default_templates()
+        # Try multiple paths
+        possible_paths = [
+            self.templates_path,
+            os.path.join(
+                os.path.dirname(__file__), "../../../data/capsule_templates.json"
+            ),
+            os.path.join(os.getcwd(), "data/capsule_templates.json"),
+        ]
+
+        for path in possible_paths:
+            try:
+                if os.path.exists(path):
+                    with open(path, "r") as f:
+                        self.templates = json.load(f)
+                    return
+            except Exception:
+                continue
+
+        # Fallback to defaults
+        logger.warning(f"Templates file not found, using defaults")
+        self.templates = self._default_templates()
 
     def _load_category_mapping(self):
         """Map template item names to database categories"""

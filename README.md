@@ -15,7 +15,7 @@ CapsuleOS helps you plan a cohesive quarterly capsule wardrobe and avoid low-val
 ## MVP Features
 
 - [x] Quarter setup (style keywords, budget, climate)
-- [ ] Capsule output (12-item capsule + palette + outfit formulas)
+- [x] Capsule output (12-item capsule + palette + outfit formulas)
 - [ ] "Should I Buy This?" scanner (Buy / Wait / Skip)
 - [ ] Review insights extractor (fit/quality complaints)
 - [ ] Alternatives retrieval
@@ -44,7 +44,7 @@ uvicorn main:app --reload
 ## Roadmap
 
 - [x] Week 1: Product + Data
-- [ ] Week 2: Capsule generator v1
+- [x] Week 2: Capsule generator v1
 - [ ] Week 3: Scanner v1
 - [ ] Week 4: Review insights extractor
 - [ ] Week 5: Ranking + alternatives

@@ -28,14 +28,19 @@ export default function CapsuleOutput() {
       {/* Palette */}
       <div className="bg-white rounded-lg shadow p-6 mb-8">
         <h2 className="text-xl font-semibold mb-4">Color Palette</h2>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           {capsule.palette.map((color, idx) => (
-            <div
-              key={idx}
-              className="w-16 h-16 rounded-full border-2 border-gray-300"
-              style={{ backgroundColor: color }}
-              title={color}
-            />
+            <div key={idx} className="flex flex-col items-center">
+              <div
+                className="w-16 h-16 rounded-full border-2 border-gray-300 shadow-sm"
+                style={{ 
+                  backgroundColor: color.toLowerCase(),
+                  borderColor: color.toLowerCase() === 'white' ? '#e5e7eb' : 'transparent'
+                }}
+                title={color}
+              />
+              <span className="text-xs text-gray-600 mt-2 capitalize">{color}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -52,25 +57,63 @@ export default function CapsuleOutput() {
 
       {/* Capsule Items */}
       <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">Capsule Items (12)</h2>
+        <h2 className="text-xl font-semibold mb-4">
+          Capsule Items ({capsule.items.length})
+        </h2>
         <div className="space-y-6">
           {capsule.items.map((item, idx) => (
-            <div key={idx} className="border-b pb-4 last:border-b-0">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                {item.category}: {item.item_name}
-              </h3>
-              <div className="grid grid-cols-2 gap-4 mt-4">
-                <div className="bg-gray-50 p-4 rounded">
-                  <div className="text-sm font-medium text-gray-600 mb-1">Best Value</div>
-                  <div className="font-semibold">{item.best_value.brand} - {item.best_value.name}</div>
-                  <div className="text-primary-600">${item.best_value.price.toFixed(2)}</div>
-                  <div className="text-sm text-gray-600 mt-1">{item.best_value.reason}</div>
+            <div key={idx} className="border-b pb-6 last:border-b-0">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-gray-900">
+                  {item.item_name}
+                </h3>
+                {item.palette_colors && item.palette_colors.length > 0 && (
+                  <div className="flex gap-2">
+                    {item.palette_colors.map((color, cIdx) => (
+                      <div
+                        key={cIdx}
+                        className="w-6 h-6 rounded-full border border-gray-300"
+                        style={{ backgroundColor: color.toLowerCase() }}
+                        title={color}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
+                  <div className="text-sm font-medium text-green-700 mb-2">
+                    💰 Best Value
+                  </div>
+                  <div className="font-semibold text-gray-900 mb-1">
+                    {item.best_value.brand}
+                  </div>
+                  <div className="text-sm text-gray-700 mb-2">
+                    {item.best_value.name}
+                  </div>
+                  <div className="text-lg font-bold text-primary-600 mb-2">
+                    ${item.best_value.price.toFixed(2)}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {item.best_value.reason}
+                  </div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded">
-                  <div className="text-sm font-medium text-gray-600 mb-1">Best Quality</div>
-                  <div className="font-semibold">{item.best_quality.brand} - {item.best_quality.name}</div>
-                  <div className="text-primary-600">${item.best_quality.price.toFixed(2)}</div>
-                  <div className="text-sm text-gray-600 mt-1">{item.best_quality.reason}</div>
+                <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                  <div className="text-sm font-medium text-blue-700 mb-2">
+                    ✨ Best Quality
+                  </div>
+                  <div className="font-semibold text-gray-900 mb-1">
+                    {item.best_quality.brand}
+                  </div>
+                  <div className="text-sm text-gray-700 mb-2">
+                    {item.best_quality.name}
+                  </div>
+                  <div className="text-lg font-bold text-primary-600 mb-2">
+                    ${item.best_quality.price.toFixed(2)}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {item.best_quality.reason}
+                  </div>
                 </div>
               </div>
             </div>

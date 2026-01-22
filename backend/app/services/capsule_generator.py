@@ -12,6 +12,7 @@ from app.models import (
     StyleKeyword,
 )
 from app.services.scoring import CapsuleScorer
+from app.services.cache import capsule_cache
 from app.database import SessionLocal, Product
 from typing import List, Dict, Any, Optional
 import json
@@ -113,8 +114,25 @@ class CapsuleGenerator:
         closet_items: List[Dict[str, Any]],
     ) -> CapsuleResponse:
         """
-        Generate capsule wardrobe
+        Generate capsule wardrobe with caching
         """
+        # Create cache key from request parameters
+        cache_key_data = {
+            "quarter": quarter.value,
+            "climate": climate.value,
+            "style_keywords": [kw.value for kw in style_keywords],
+            "budget": budget,
+            "shopping_preferences": sorted(shopping_preferences),
+            # Note: closet_items excluded from cache key for now
+        }
+        cache_key = capsule_cache._generate_key(cache_key_data)
+
+        # Check cache
+        cached_result = capsule_cache.get(cache_key)
+        if cached_result:
+            logger.info(f"Returning cached capsule for {quarter}")
+            return cached_result
+
         logger.info(f"Generating {quarter} capsule for {climate} climate")
 
         # Get base template
@@ -140,13 +158,18 @@ class CapsuleGenerator:
         # Compute do_not_buy list
         do_not_buy = self._compute_do_not_buy(closet_items, items)
 
-        return CapsuleResponse(
+        result = CapsuleResponse(
             quarter=quarter.value,
             palette=palette,
             outfit_formulas=outfit_formulas,
             items=items,
             do_not_buy=do_not_buy,
         )
+
+        # Cache the result
+        capsule_cache.set(cache_key, result)
+
+        return result
 
     async def _generate_items(
         self,

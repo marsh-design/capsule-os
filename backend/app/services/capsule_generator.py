@@ -225,8 +225,12 @@ class CapsuleGenerator:
                 if best_quality and best_quality.colors:
                     item_colors.extend(best_quality.colors)
 
-                best_value_image = getattr(best_value, "image_url", None) if best_value else None
-                best_quality_image = getattr(best_quality, "image_url", None) if best_quality else None
+                best_value_image = (
+                    getattr(best_value, "image_url", None) if best_value else None
+                )
+                best_quality_image = (
+                    getattr(best_quality, "image_url", None) if best_quality else None
+                )
 
                 capsule_items.append(
                     CapsuleItem(

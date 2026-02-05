@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Quick test of capsule generation"""
+"""Quick test of capsule generation."""
 import asyncio
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from app.services.capsule_generator import CapsuleGenerator
 from app.models import Quarter, Climate, StyleKeyword

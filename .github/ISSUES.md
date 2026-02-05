@@ -1,39 +1,30 @@
-# GitHub Issues to Create
+# GitHub Issues (Reference)
 
-Copy and paste these into GitHub Issues:
+Status as of current codebase. Use these as templates for new issues or to track remaining work.
 
-## Issue 1: Setup capsule generator endpoint
-**Labels:** `enhancement`, `backend`
+## ✅ Done (no issue needed)
 
-Implement the `/api/generate-capsule` endpoint with dynamic capsule generation based on user preferences. Replace hardcoded templates with actual product retrieval and ranking logic.
+- **Capsule generator:** `/api/generate-capsule` with dynamic generation, product retrieval, palette, best value/quality, product images.
+- **Scanner UI:** "Should I Buy This?" page with verdict, pros/cons, alternatives.
+- **Scoring:** Palette match, versatility, closet overlap, cost-per-wear in `backend/app/services/scoring.py`.
+- **Review insights baseline:** Rule-based/mock in `review_analyzer`; not full ML yet.
 
-## Issue 2: Build scanner UI card
-**Labels:** `enhancement`, `frontend`
-
-Create the "Should I Buy This?" scanner UI card with verdict display, pros/cons list, and alternatives section.
-
-## Issue 3: Implement scoring function
-**Labels:** `enhancement`, `backend`
-
-Build the scoring function that computes:
-- Palette match score
-- Versatility score
-- Closet overlap score
-- Cost-per-wear estimate
-
-## Issue 4: Add review insights extractor baseline
+## Issue 1: Real review insights extractor (ML)
 **Labels:** `enhancement`, `ml`
 
-Implement baseline review insights extractor using keyword extraction to identify:
-- Fit signals (runs small/large)
-- Quality issues (pilling, see-through)
-- Common complaints
+Replace mock review insights with keyword/sentiment extraction to identify fit signals, quality issues, and common complaints. See `docs/PRD.md` and `docs/ARCHITECTURE.md`.
 
-## Issue 5: Add evaluation harness skeleton
+## Issue 2: Evaluation harness skeleton
 **Labels:** `enhancement`, `testing`
 
-Create evaluation harness with:
-- Verdict accuracy metrics
-- Helpfulness score
-- Consistency score
-- Test dataset
+Create evaluation harness with verdict accuracy, helpfulness score, consistency score, and a small test dataset.
+
+## Issue 3: Product link parsing (scanner)
+**Labels:** `enhancement`, `backend`
+
+When user submits a product URL, fetch and parse the page to prefill description/brand/price (or integrate with a product API).
+
+## Issue 4: Vector search for alternatives
+**Labels:** `enhancement`, `backend`, `ml`
+
+Add embedding-based or vector search for “similar items” alternatives instead of (or in addition to) same price-range DB lookup.

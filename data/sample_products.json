@@ -7,7 +7,7 @@
     "price": 28.0,
     "description": "Classic crew neck t-shirt in organic cotton",
     "colors": ["white", "black", "navy", "gray"],
-    "image_url": "https://example.com/everlane-crew.jpg",
+    "image_url": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80",
     "metadata": {
       "material": "organic_cotton",
       "care": "machine_wash",
@@ -22,7 +22,7 @@
     "price": 48.0,
     "description": "Sleek bodysuit with snap closure",
     "colors": ["black", "white", "brown"],
-    "image_url": "https://example.com/aritzia-bodysuit.jpg",
+    "image_url": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80",
     "metadata": {
       "material": "nylon_spandex",
       "care": "hand_wash",
@@ -37,7 +37,7 @@
     "price": 89.0,
     "description": "Classic trench coat in beige",
     "colors": ["beige", "black", "navy"],
-    "image_url": "https://example.com/zara-trench.jpg",
+    "image_url": "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600&q=80",
     "metadata": {
       "material": "polyester_cotton",
       "care": "dry_clean",
@@ -52,7 +52,7 @@
     "price": 78.0,
     "description": "Classic straight-leg jean with stretch",
     "colors": ["blue", "black", "white"],
-    "image_url": "https://example.com/everlane-jean.jpg",
+    "image_url": "https://images.unsplash.com/photo-1541099649101-283d34048142?w=600&q=80",
     "metadata": {
       "material": "cotton_elastane",
       "care": "machine_wash",
@@ -67,7 +67,7 @@
     "price": 88.0,
     "description": "Relaxed wide-leg pant in linen blend",
     "colors": ["beige", "black", "sage", "tan"],
-    "image_url": "https://example.com/aritzia-pant.jpg",
+    "image_url": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=80",
     "metadata": {
       "material": "linen_viscose",
       "care": "machine_wash",
@@ -82,7 +82,7 @@
     "price": 145.0,
     "description": "Classic pointed-toe heel",
     "colors": ["black", "nude", "red"],
-    "image_url": "https://example.com/everlane-heel.jpg",
+    "image_url": "https://images.unsplash.com/photo-1543163521-20bf0c1f56e0?w=600&q=80",
     "metadata": {
       "material": "leather",
       "care": "polish",
@@ -97,7 +97,7 @@
     "price": 79.0,
     "description": "Classic ankle boot with block heel",
     "colors": ["black", "brown", "tan"],
-    "image_url": "https://example.com/zara-boot.jpg",
+    "image_url": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80",
     "metadata": {
       "material": "synthetic_leather",
       "care": "wipe_clean",
@@ -112,7 +112,7 @@
     "price": 98.0,
     "description": "Elegant slip dress in satin",
     "colors": ["black", "navy", "burgundy"],
-    "image_url": "https://example.com/aritzia-dress.jpg",
+    "image_url": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80",
     "metadata": {
       "material": "polyester",
       "care": "dry_clean",
@@ -127,7 +127,7 @@
     "price": 68.0,
     "description": "Sustainable backpack made from recycled materials",
     "colors": ["black", "navy", "gray"],
-    "image_url": "https://example.com/everlane-backpack.jpg",
+    "image_url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80",
     "metadata": {
       "material": "recycled_polyester",
       "care": "spot_clean",
@@ -142,7 +142,7 @@
     "price": 69.0,
     "description": "Classic oversized blazer",
     "colors": ["black", "navy", "beige", "gray"],
-    "image_url": "https://example.com/zara-blazer.jpg",
+    "image_url": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80",
     "metadata": {
       "material": "polyester_wool",
       "care": "dry_clean",

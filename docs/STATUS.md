@@ -11,7 +11,7 @@
 - Reads capsule from `localStorage`.
 - Shows palette (color swatches + labels).
 - Shows outfit formulas (text list).
-- Shows 12 items with Best Value / Best Quality per item (brand, name, price, reason).
+- Shows 12 items with **product images** (when available from API), item name, palette dots, and Best Value / Best Quality per item (brand, name, price). Images come from seed data (Unsplash URLs) and are passed through the capsule API (`image_url` on each option).
 - Shows “Do Not Buy” if you had closet items (we don’t have closet upload wired yet, so this is usually empty).
 
 **Backend**
@@ -38,7 +38,7 @@
 **Capsule Output**
 - Palette uses a **color-name → hex map** (sage, camel, navy, etc.) so swatches render correctly.
 - **Empty state**: if no capsule in localStorage, shows “No capsule yet” and a “Create capsule” button instead of redirecting.
-- No product images, no links to buy. “Do Not Buy” still usually blank (no closet in flow).
+- Product images: shown when the capsule was generated after seeding DB with `image_url` (re-seed and regenerate capsule to see them). No product links to buy yet. “Do Not Buy” still usually blank (no closet in flow).
 
 **Scanner**
 - **Link input**: backend does not fetch or parse the URL. It returns a generic “Product from link” style response. No real data from the link.
@@ -61,6 +61,6 @@
 
 ## One-line summary
 
-**Works:** Quarter Setup → Generate Capsule → see a real capsule (palette, formulas, 12 items from DB or placeholders). Scanner returns a structured verdict + pros/cons/cost-per-wear, but all backend logic is mock/fake.
+**Works:** Quarter Setup → Generate Capsule → see a real capsule (palette, formulas, 12 items from DB with product images when seeded, or placeholders). Scanner returns a structured verdict + pros/cons/cost-per-wear + alternatives from DB; backend uses heuristics and DB lookups (no LLM required).
 
-**Doesn’t / bare:** Real link parsing, real review insights, real alternatives, closet in the flow, product images/links, and most “smart” behavior. Scanner and many capsule slots are placeholder-level.
+**Doesn’t / bare:** Real product-link parsing, real review-insights ML, closet in the flow, product buy links. Some capsule slots still get generic placeholders when no DB product matches the category.

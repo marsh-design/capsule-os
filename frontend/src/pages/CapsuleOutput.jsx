@@ -22,24 +22,24 @@ export default function CapsuleOutput() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-16">
-        <span className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-primary-600 border-t-transparent" />
+      <div className="flex items-center justify-center py-24">
+        <span className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-black border-t-transparent" />
       </div>
     )
   }
 
   if (!capsule) {
     return (
-      <div className="max-w-md mx-auto text-center py-16">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">
+      <div className="max-w-md mx-auto text-center py-24">
+        <h2 className="font-serif text-3xl font-medium tracking-tight text-black mb-3">
           No capsule yet
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-neutral-500 text-sm tracking-wide uppercase mb-8">
           Create your first quarterly capsule to see your palette and items here.
         </p>
         <Link
           to="/"
-          className="inline-block bg-primary-600 text-white px-6 py-3 rounded-md font-medium hover:bg-primary-700"
+          className="inline-block bg-black text-white px-8 py-4 text-xs font-medium tracking-wide uppercase hover:bg-neutral-800 transition-opacity"
         >
           Create capsule
         </Link>
@@ -49,115 +49,141 @@ export default function CapsuleOutput() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">
-        Your {capsule.quarter} Capsule
-      </h1>
+      <header className="mb-16">
+        <p className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-2">
+          Your capsule
+        </p>
+        <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-black">
+          {capsule.quarter}
+        </h1>
+      </header>
 
       {/* Palette */}
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">Color Palette</h2>
-        <div className="flex flex-wrap gap-4">
+      <section className="mb-20">
+        <h2 className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-6">
+          Palette
+        </h2>
+        <div className="flex flex-wrap gap-6">
           {capsule.palette.map((color, idx) => (
             <div key={idx} className="flex flex-col items-center">
               <div
-                className="w-16 h-16 rounded-full border-2 border-gray-300 shadow-sm"
+                className="w-14 h-14 rounded-full border border-stone-200"
                 style={{ backgroundColor: getColorHex(color) }}
                 title={color}
               />
-              <span className="text-xs text-gray-600 mt-2 capitalize">
+              <span className="text-[11px] text-neutral-500 mt-3 uppercase tracking-wide">
                 {color}
               </span>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Outfit Formulas */}
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">Outfit Formulas</h2>
+      {/* Outfit formulas */}
+      <section className="mb-20">
+        <h2 className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-6">
+          Outfit formulas
+        </h2>
         <ul className="space-y-2">
           {capsule.outfit_formulas.map((formula, idx) => (
-            <li key={idx} className="text-gray-700">• {formula}</li>
+            <li
+              key={idx}
+              className="font-serif text-xl md:text-2xl text-black tracking-tight"
+            >
+              {formula}
+            </li>
           ))}
         </ul>
-      </div>
+      </section>
 
-      {/* Capsule Items */}
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">
-          Capsule Items ({capsule.items.length})
+      {/* Capsule items — grid */}
+      <section>
+        <h2 className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-8">
+          {capsule.items.length} items
         </h2>
-        <div className="space-y-6">
-          {capsule.items.map((item, idx) => (
-            <div key={idx} className="border-b pb-6 last:border-b-0">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  {item.item_name}
-                </h3>
-                {item.palette_colors && item.palette_colors.length > 0 && (
-                  <div className="flex gap-2">
-                    {item.palette_colors.map((color, cIdx) => (
-                      <div
-                        key={cIdx}
-                        className="w-6 h-6 rounded-full border border-gray-300"
-                        style={{ backgroundColor: getColorHex(color) }}
-                        title={color}
-                      />
-                    ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          {capsule.items.map((item, idx) => {
+            const valueImg = item.best_value?.image_url
+            const qualityImg = item.best_quality?.image_url
+            const mainImg = valueImg || qualityImg
+            return (
+              <article
+                key={idx}
+                className="border-t border-stone-200 pt-6 group"
+              >
+                {mainImg && (
+                  <div className="aspect-[3/4] w-full mb-6 bg-stone-100 overflow-hidden">
+                    <img
+                      src={mainImg}
+                      alt={item.item_name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-                  <div className="text-sm font-medium text-green-700 mb-2">
-                    💰 Best Value
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <h3 className="font-serif text-2xl font-medium tracking-tight text-black">
+                    {item.item_name}
+                  </h3>
+                  {item.palette_colors?.length > 0 && (
+                    <div className="flex gap-1.5 shrink-0">
+                      {item.palette_colors.map((color, cIdx) => (
+                        <div
+                          key={cIdx}
+                          className="w-4 h-4 rounded-full border border-stone-200"
+                          style={{ backgroundColor: getColorHex(color) }}
+                          title={color}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wide text-neutral-500 mb-1">
+                      Value
+                    </p>
+                    <p className="font-sans text-sm font-medium text-black">
+                      {item.best_value.brand}
+                    </p>
+                    <p className="text-sm text-neutral-600">
+                      {item.best_value.name}
+                    </p>
+                    <p className="mt-2 text-black font-medium">
+                      ${item.best_value.price.toFixed(2)}
+                    </p>
                   </div>
-                  <div className="font-semibold text-gray-900 mb-1">
-                    {item.best_value.brand}
-                  </div>
-                  <div className="text-sm text-gray-700 mb-2">
-                    {item.best_value.name}
-                  </div>
-                  <div className="text-lg font-bold text-primary-600 mb-2">
-                    ${item.best_value.price.toFixed(2)}
-                  </div>
-                  <div className="text-xs text-gray-600">
-                    {item.best_value.reason}
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wide text-neutral-500 mb-1">
+                      Quality
+                    </p>
+                    <p className="font-sans text-sm font-medium text-black">
+                      {item.best_quality.brand}
+                    </p>
+                    <p className="text-sm text-neutral-600">
+                      {item.best_quality.name}
+                    </p>
+                    <p className="mt-2 text-black font-medium">
+                      ${item.best_quality.price.toFixed(2)}
+                    </p>
                   </div>
                 </div>
-                <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-                  <div className="text-sm font-medium text-blue-700 mb-2">
-                    ✨ Best Quality
-                  </div>
-                  <div className="font-semibold text-gray-900 mb-1">
-                    {item.best_quality.brand}
-                  </div>
-                  <div className="text-sm text-gray-700 mb-2">
-                    {item.best_quality.name}
-                  </div>
-                  <div className="text-lg font-bold text-primary-600 mb-2">
-                    ${item.best_quality.price.toFixed(2)}
-                  </div>
-                  <div className="text-xs text-gray-600">
-                    {item.best_quality.reason}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+              </article>
+            )
+          })}
         </div>
-      </div>
+      </section>
 
-      {/* Do Not Buy */}
-      {capsule.do_not_buy && capsule.do_not_buy.length > 0 && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-red-900 mb-4">Do Not Buy</h2>
-          <ul className="space-y-2">
+      {capsule.do_not_buy?.length > 0 && (
+        <section className="mt-20 pt-10 border-t border-stone-200">
+          <h2 className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-4">
+            Do not buy
+          </h2>
+          <ul className="space-y-1 text-sm text-neutral-600">
             {capsule.do_not_buy.map((item, idx) => (
-              <li key={idx} className="text-red-700">• {item}</li>
+              <li key={idx}>— {item}</li>
             ))}
           </ul>
-        </div>
+        </section>
       )}
     </div>
   )

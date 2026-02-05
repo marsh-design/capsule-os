@@ -33,7 +33,7 @@ app/
    - User inputs → FastAPI → CapsuleGenerator → Template + Scoring → Response
 
 2. **Item Analysis**:
-   - Product link/description → ItemAnalyzer → ReviewAnalyzer → ItemScorer → LLM → Response
+   - Product link/description → ItemAnalyzer → ReviewAnalyzer (rule-based) → ItemScorer → Response (optional LLM for pros/cons)
 
 3. **Review Analysis**:
    - Reviews → Keyword extraction → Sentiment analysis → Structured insights
@@ -51,9 +51,14 @@ app/
 - Closet overlap: Duplicate detection
 - Cost-per-wear: Price / estimated wears
 
+## Current Behavior
+
+- **Capsule API** returns `image_url` on each item’s best_value / best_quality options (from Product table). Frontend shows one product image per capsule item in the lookbook grid.
+- **Alternatives** are fetched from the same DB (same price range); no vector search yet.
+
 ## Future Enhancements
 
-- Vector search for alternatives (ChromaDB)
-- LLM integration for pros/cons generation
-- Fine-tuned review classifier
-- Real-time product scraping
+- Vector search for similar-item alternatives (e.g. ChromaDB)
+- LLM integration for richer pros/cons generation
+- Real review-insights ML pipeline
+- Real-time product link parsing

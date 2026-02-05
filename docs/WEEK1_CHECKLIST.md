@@ -36,24 +36,25 @@
 - ✅ Baseline services (scoring, generators, analyzers)
 - ✅ Seed script (`backend/scripts/seed_db.py`)
 
-## 🎯 Next Steps (Week 2)
+## 🎯 Progress Since Week 1 (Weeks 2–3)
 
-1. **Capsule Generator v1**
-   - Replace hardcoded templates with dynamic generation
-   - Implement actual product retrieval
-   - Add palette matching logic
-   - Test with various user inputs
+1. **Capsule Generator v1** ✅
+   - Dynamic generation from templates + DB product retrieval
+   - Palette extraction, outfit formulas, best value / best quality per item
+   - Product images in API and capsule lookbook (seed data has Unsplash URLs)
+   - Caching and scoring in place
 
-2. **Frontend Polish**
-   - Add loading states
-   - Improve error handling
-   - Add form validation
-   - Enhance UI/UX
+2. **Scanner v1** ✅
+   - “Should I Buy This?” UI and `/api/analyze-item` endpoint
+   - Verdict (Buy/Wait/Skip), pros/cons, cost-per-wear, alternatives from DB
 
-3. **Testing**
-   - Write unit tests for scoring logic
-   - Test API endpoints
-   - Test frontend components
+3. **Frontend**
+   - Loading states and in-page error messages
+   - SSENSE-style editorial UI (typography, layout, lookbook grid with images)
+
+4. **Testing**
+   - Unit tests for scoring and cache
+   - See `docs/STATUS.md` for current “what works / what’s bare”
 
 ## 📊 Data Quality
 
@@ -63,7 +64,7 @@ Current dataset:
 - **Brands**: Everlane, Aritzia, Zara
 - **Categories**: Top, Bottom, Outerwear, Shoes, Dress, Accessory
 
-**Note**: For production, expand to 50-100 products and 500-2000 reviews.
+**Note**: Sample products include `image_url` (Unsplash) for capsule lookbook. For production, expand to 50-100 products and 500-2000 reviews.
 
 ## 🔧 Technical Debt
 

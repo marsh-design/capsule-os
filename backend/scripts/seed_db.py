@@ -11,6 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from app.database import SessionLocal, Product, Review, init_db
+from sqlalchemy import delete
 from sqlalchemy.orm import Session
 
 
@@ -60,6 +61,12 @@ def main():
 
     db = SessionLocal()
     try:
+        # Clear existing data so re-running seed doesn't hit UNIQUE constraint
+        print("Clearing existing products and reviews...")
+        db.execute(delete(Review))
+        db.execute(delete(Product))
+        db.commit()
+
         # Get data directory
         data_dir = Path(__file__).parent.parent.parent / "data"
 

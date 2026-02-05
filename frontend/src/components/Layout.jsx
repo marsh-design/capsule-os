@@ -1,40 +1,41 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from "react-router-dom"
 
 export default function Layout({ children }) {
+  const location = useLocation()
+
+  const linkClass = (path) =>
+    `text-[11px] font-medium tracking-wide uppercase transition-colors duration-200 ${
+      location.pathname === path
+        ? "text-black border-b border-black pb-px"
+        : "text-neutral-500 hover:text-black"
+    }`
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <Link to="/" className="flex items-center">
-                <span className="text-2xl font-bold text-primary-600">CapsuleOS</span>
+    <div className="min-h-screen bg-offwhite">
+      <header className="sticky top-0 z-50 bg-offwhite/95 backdrop-blur border-b border-stone-200">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <nav className="flex justify-between items-center h-16 md:h-20">
+            <Link
+              to="/"
+              className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-black hover:opacity-80 transition-opacity"
+            >
+              CapsuleOS
+            </Link>
+            <div className="flex items-center gap-8">
+              <Link to="/" className={linkClass("/")}>
+                Plan
+              </Link>
+              <Link to="/capsule" className={linkClass("/capsule")}>
+                Capsule
+              </Link>
+              <Link to="/scanner" className={linkClass("/scanner")}>
+                Should I Buy
               </Link>
             </div>
-            <div className="flex space-x-8">
-              <Link
-                to="/"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-primary-600"
-              >
-                Quarter Setup
-              </Link>
-              <Link
-                to="/capsule"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-primary-600"
-              >
-                My Capsule
-              </Link>
-              <Link
-                to="/scanner"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-primary-600"
-              >
-                Should I Buy This?
-              </Link>
-            </div>
-          </div>
+          </nav>
         </div>
-      </nav>
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      </header>
+      <main className="max-w-[1400px] mx-auto px-6 lg:px-10 py-12 md:py-16">
         {children}
       </main>
     </div>

@@ -15,93 +15,88 @@ CapsuleOS helps you plan a cohesive quarterly capsule wardrobe and avoid low-val
 ## MVP Features
 
 - [x] Quarter setup (style keywords, budget, climate)
-- [x] Capsule output (12-item capsule + palette + outfit formulas)
-- [ ] "Should I Buy This?" scanner (Buy / Wait / Skip)
-- [ ] Review insights extractor (fit/quality complaints)
-- [ ] Alternatives retrieval
+- [x] Capsule output (12-item capsule + palette + outfit formulas + product images)
+- [x] "Should I Buy This?" scanner (Buy / Wait / Skip + pros/cons + alternatives)
+- [ ] Review insights extractor (real fit/quality from reviews; currently rule-based)
+- [x] Alternatives retrieval (same price range from DB)
+- [x] Product images in capsule lookbook (Unsplash placeholders in seed data)
 
 ## Tech Stack
 
-**Frontend:** React + Tailwind  
+**Frontend:** React + Vite + Tailwind  
 **Backend:** FastAPI (Python)  
-**Storage:** SQLite/Postgres (TBD)  
-**AI:** SentenceTransformers + (optional) OpenAI + structured outputs
+**Storage:** SQLite (DB initializes on server startup)  
+**AI:** Heuristics + (optional) OpenAI; structured outputs for capsule/scanner
 
 ## Run locally
 
 ```bash
-# frontend
-cd frontend
+# backend (from backend/ with venv activated)
+pip install -r requirements.txt
+python scripts/seed_db.py   # optional: seed products + reviews
+uvicorn main:app --reload
+
+# frontend (from frontend/)
 npm install
 npm run dev
-
-# backend
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
 ```
 
 ## Roadmap
 
 - [x] Week 1: Product + Data
 - [x] Week 2: Capsule generator v1
-- [ ] Week 3: Scanner v1
-- [ ] Week 4: Review insights extractor
-- [ ] Week 5: Ranking + alternatives
+- [x] Week 3: Scanner v1 (UI + API, heuristic-based)
+- [ ] Week 4: Review insights extractor (real ML/NLP)
+- [x] Week 5: Ranking + alternatives (DB-backed alternatives)
 - [ ] Week 6: Evaluation + polish + deploy
 
 ## Setup
 
-1. **Clone the repository:**
-```bash
-git clone https://github.com/marsh-design/capsule-os.git
-cd capsule-os
-```
+1. **Clone the repository** and go to the project directory.
 
 2. **Backend setup:**
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-
-# Copy environment file
-cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY (optional for MVP)
+cp .env.example .env      # Add OPENAI_API_KEY if using LLM features
 ```
 
-3. **Frontend setup:**
+3. **Seed the database** (creates tables and sample products + reviews):
+```bash
+python scripts/seed_db.py
+```
+
+4. **Frontend setup:**
 ```bash
 cd frontend
 npm install
 ```
 
-4. **Run:**
+5. **Run:**
 ```bash
-# Terminal 1: Backend
-cd backend
-uvicorn main:app --reload
+# Terminal 1: Backend (initializes DB on startup)
+cd backend && source venv/bin/activate && uvicorn main:app --reload
 
 # Terminal 2: Frontend
-cd frontend
-npm run dev
+cd frontend && npm run dev
 ```
 
-Or use Docker:
-```bash
-docker-compose up
-```
+Frontend: http://localhost:5173 (Vite) or http://localhost:3000 — proxy forwards `/api` to backend:8000.
+
+**Docker:** `docker-compose up` (see SETUP.md for details).
 
 ## Project Structure
 
 ```
-capsule-os/
-├── frontend/          # React + Tailwind UI
-├── backend/           # FastAPI + ML pipeline
-├── data/              # Sample datasets
-├── notebooks/         # EDA + model experiments
-├── eval/              # Evaluation harness
-└── docs/              # Architecture + PRD
+ai_stylist/               # or your repo name
+├── frontend/            # React + Vite + Tailwind
+├── backend/             # FastAPI, routers, services, DB
+├── data/                # Sample products, reviews, capsule templates, schema
+├── docs/                # STATUS, PRD, ARCHITECTURE, checklists
+├── eval/                # Evaluation harness (placeholder)
+└── docker-compose.yml
 ```
 
 ## How It Works
@@ -132,13 +127,13 @@ CapsuleOS generates personalized quarterly capsules through a multi-step process
 
 ## What This Demonstrates
 
-- ✅ **ML/NLP**: Review summarization, sentiment analysis, aspect extraction
-- ✅ **LLM Orchestration**: Structured outputs, prompts, guardrails
-- ✅ **RAG**: Store/item info retrieval, user closet retrieval
-- ✅ **Ranking/Recommendation**: Top picks + tradeoffs
-- ✅ **Evaluation**: Offline metrics + human eval rubric
-- ✅ **Full Stack**: React + FastAPI + PostgreSQL
-- ✅ **Production Engineering**: Logging, caching, tests, CI
+- ✅ **Full Stack**: React + Vite + FastAPI + SQLite
+- ✅ **Ranking/Recommendation**: Best value / best quality picks, alternatives from DB
+- ✅ **Caching**: TTL-based capsule response cache
+- ✅ **Structured APIs**: Pydantic models, health check, capsule + analyze endpoints
+- 🚧 **ML/NLP**: Review insights (baseline/rule-based; full pipeline planned)
+- 🚧 **LLM**: Optional for pros/cons; prompts in place
+- 📋 **Planned**: RAG, vector search, evaluation harness, production deploy
 
 ## Development Progress
 
@@ -153,15 +148,14 @@ CapsuleOS generates personalized quarterly capsules through a multi-step process
 - [x] API health check endpoint
 
 ### 🚧 In Progress
-- [ ] "Should I Buy This?" scanner
-- [ ] Review insights extractor
-- [ ] Alternatives retrieval
+- [ ] Review insights extractor (real ML; currently rule-based)
+- [ ] LLM integration for richer pros/cons
 
 ### 📋 Planned
-- [ ] LLM integration for pros/cons
-- [ ] Vector search for alternatives
+- [ ] Vector search for similar-item alternatives
 - [ ] Evaluation harness
 - [ ] Production deployment
+- [ ] Real product-link parsing (scanner)
 
 ## License
 

@@ -43,6 +43,7 @@ class ItemOption(BaseModel):
     name: str
     price: float
     link: Optional[str] = None
+    image_url: Optional[str] = None
     reason: str  # Why this is the best value/quality option
 
 

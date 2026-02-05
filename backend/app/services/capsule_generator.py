@@ -225,6 +225,9 @@ class CapsuleGenerator:
                 if best_quality and best_quality.colors:
                     item_colors.extend(best_quality.colors)
 
+                best_value_image = getattr(best_value, "image_url", None) if best_value else None
+                best_quality_image = getattr(best_quality, "image_url", None) if best_quality else None
+
                 capsule_items.append(
                     CapsuleItem(
                         category=self._format_category_name(template_item),
@@ -237,6 +240,7 @@ class CapsuleGenerator:
                                 else f"{template_item} (Value)"
                             ),
                             price=best_value.price if best_value else budget / 12 * 0.6,
+                            image_url=best_value_image,
                             reason="Great quality-to-price ratio",
                         ),
                         best_quality=ItemOption(
@@ -251,6 +255,7 @@ class CapsuleGenerator:
                                 if best_quality
                                 else budget / 12 * 1.4
                             ),
+                            image_url=best_quality_image,
                             reason="Premium materials and construction",
                         ),
                         palette_colors=(
@@ -321,6 +326,7 @@ class CapsuleGenerator:
                 brand=shopping_preferences[0] if shopping_preferences else "Generic",
                 name=f"Best Value {category}",
                 price=budget / 12 * 0.6,
+                image_url=None,
                 reason="Great quality-to-price ratio",
             ),
             best_quality=ItemOption(
@@ -331,6 +337,7 @@ class CapsuleGenerator:
                 ),
                 name=f"Best Quality {category}",
                 price=budget / 12 * 1.4,
+                image_url=None,
                 reason="Premium materials and construction",
             ),
             palette_colors=["black", "white"],

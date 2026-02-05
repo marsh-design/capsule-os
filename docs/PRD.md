@@ -31,11 +31,11 @@ A wardrobe planning tool that generates quarterly capsule wardrobes (10-15 items
 - Color palette (5-7 colors)
 - Outfit formulas (e.g., "Trench + White Tee + Jeans + Loafers")
 - 12-item capsule list with:
+  - Product image (when available from API)
   - Item name
   - Category
-  - Price range
-  - "Best Value" option
-  - "Best Quality" option
+  - "Best Value" option (brand, name, price)
+  - "Best Quality" option (brand, name, price)
 - "Do Not Buy" list (duplicates or bad value items)
 
 ### 3. "Should I Buy This?" Scanner
@@ -108,8 +108,8 @@ A wardrobe planning tool that generates quarterly capsule wardrobes (10-15 items
 ## Timeline
 
 - Week 1: Product + Data ✅
-- Week 2: Capsule Generator v1
-- Week 3: "Should I Buy This?" v1
-- Week 4: Review ML Analyzer
-- Week 5: Ranking + Alternatives
-- Week 6: Evaluation + Polish
+- Week 2: Capsule Generator v1 ✅
+- Week 3: "Should I Buy This?" v1 ✅
+- Week 4: Review ML Analyzer (planned)
+- Week 5: Ranking + Alternatives ✅ (DB-backed alternatives; vector search planned)
+- Week 6: Evaluation + Polish (planned)

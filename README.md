@@ -1,5 +1,8 @@
 # CapsuleOS 👗✨
 
+[![CI](https://github.com/marsh-design/capsule-os/actions/workflows/ci.yml/badge.svg)](https://github.com/marsh-design/capsule-os/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Quarterly capsule planner + "Should I buy this?" AI decision assistant.
 
 ![CapsuleOS Demo](docs/demo.gif)

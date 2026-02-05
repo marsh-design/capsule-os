@@ -54,8 +54,10 @@ class ItemAnalyzer:
         # Generate verdict
         verdict = self._determine_verdict(score_result["total_score"])
 
-        # Generate pros/cons
-        pros, cons = self._generate_pros_cons(score_result, review_insights)
+        # Generate pros/cons (include product_info for price/brand context)
+        pros, cons = self._generate_pros_cons(
+            score_result, review_insights, product_info
+        )
 
         # Check closet overlap
         closet_warning = await self._check_closet_overlap(product_info, user_id)
@@ -94,11 +96,16 @@ class ItemAnalyzer:
             return Verdict.SKIP
 
     def _generate_pros_cons(
-        self, score_result: Dict[str, Any], review_insights: Optional[Dict[str, Any]]
+        self,
+        score_result: Dict[str, Any],
+        review_insights: Optional[Dict[str, Any]],
+        product_info: Optional[Dict[str, Any]] = None,
     ) -> Tuple[List[str], List[str]]:
-        """Generate pros and cons list"""
+        """Generate pros and cons list from score, reviews, and product context."""
         pros = []
         cons = []
+        price = product_info.get("price") if product_info else None
+        brand = (product_info.get("brand") or "").strip() if product_info else ""
 
         if score_result.get("palette_score", 0) > 0.7:
             pros.append("Matches your capsule palette")
@@ -110,16 +117,26 @@ class ItemAnalyzer:
                 pros.append("Positive reviews from customers")
             else:
                 cons.append("Mixed customer reviews")
-
             if review_insights.get("fit_signal") == "runs small":
                 cons.append("Runs small - consider sizing up")
 
-        if score_result.get("cost_per_wear", 0) < 5:
-            pros.append("Great cost-per-wear value")
-        elif score_result.get("cost_per_wear", 0) > 20:
-            cons.append("High cost-per-wear - may not get enough use")
+        if price is not None:
+            if price < 50:
+                pros.append("Budget-friendly price point")
+            elif price > 150:
+                cons.append("Premium price — consider cost per wear")
 
-        return pros[:5], cons[:5]  # Limit to 5 each
+        cpw = score_result.get("cost_per_wear")
+        if cpw is not None:
+            if cpw < 5:
+                pros.append("Great cost-per-wear value")
+            elif cpw > 20:
+                cons.append("High cost-per-wear - may not get enough use")
+
+        if brand and brand != "Unknown":
+            pros.append(f"From {brand} — known for quality basics")
+
+        return pros[:5], cons[:5]
 
     async def _check_closet_overlap(
         self, product_info: Dict[str, Any], user_id: Optional[int]
@@ -131,13 +148,44 @@ class ItemAnalyzer:
     async def _get_alternatives(
         self, product_info: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
-        """Get alternative product recommendations"""
-        # TODO: Implement vector search for alternatives
-        return [
-            {
-                "brand": "Alternative Brand",
-                "name": "Similar Item",
-                "price": product_info.get("price", 0) * 0.8,
-                "reason": "Similar style, better value",
-            }
-        ]
+        """Get alternative product recommendations from DB (same category or price range)."""
+        from app.database import SessionLocal, Product
+
+        price = product_info.get("price")
+        target_price = price if price and price > 0 else 50.0
+        low = target_price * 0.5
+        high = target_price * 1.5
+
+        db = SessionLocal()
+        try:
+            # Get products in similar price range, exclude same brand if known
+            brand = product_info.get("brand")
+            query = db.query(Product).filter(
+                Product.price >= low,
+                Product.price <= high,
+            )
+            if brand and brand != "Unknown":
+                query = query.filter(Product.brand != brand)
+            products = query.order_by(Product.price).limit(3).all()
+
+            return [
+                {
+                    "brand": p.brand,
+                    "name": p.name,
+                    "price": float(p.price) if p.price is not None else None,
+                    "reason": "Similar price range, different option",
+                }
+                for p in products
+            ]
+        except Exception as e:
+            logger.warning(f"Alternatives lookup failed: {e}")
+            return [
+                {
+                    "brand": "See capsule",
+                    "name": "Check your capsule for similar items",
+                    "price": None,
+                    "reason": "Similar style, compare in your plan",
+                }
+            ]
+        finally:
+            db.close()

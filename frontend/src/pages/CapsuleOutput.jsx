@@ -1,22 +1,50 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { getColorHex } from "../lib/colors"
 
 export default function CapsuleOutput() {
-  const navigate = useNavigate()
   const [capsule, setCapsule] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem('capsule')
+    const stored = localStorage.getItem("capsule")
     if (stored) {
-      setCapsule(JSON.parse(stored))
+      try {
+        setCapsule(JSON.parse(stored))
+      } catch {
+        setCapsule(null)
+      }
     } else {
-      // If no capsule, redirect to setup
-      navigate('/')
+      setCapsule(null)
     }
-  }, [navigate])
+    setLoading(false)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-16">
+        <span className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-primary-600 border-t-transparent" />
+      </div>
+    )
+  }
 
   if (!capsule) {
-    return <div>Loading...</div>
+    return (
+      <div className="max-w-md mx-auto text-center py-16">
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">
+          No capsule yet
+        </h2>
+        <p className="text-gray-600 mb-6">
+          Create your first quarterly capsule to see your palette and items here.
+        </p>
+        <Link
+          to="/"
+          className="inline-block bg-primary-600 text-white px-6 py-3 rounded-md font-medium hover:bg-primary-700"
+        >
+          Create capsule
+        </Link>
+      </div>
+    )
   }
 
   return (
@@ -33,13 +61,12 @@ export default function CapsuleOutput() {
             <div key={idx} className="flex flex-col items-center">
               <div
                 className="w-16 h-16 rounded-full border-2 border-gray-300 shadow-sm"
-                style={{ 
-                  backgroundColor: color.toLowerCase(),
-                  borderColor: color.toLowerCase() === 'white' ? '#e5e7eb' : 'transparent'
-                }}
+                style={{ backgroundColor: getColorHex(color) }}
                 title={color}
               />
-              <span className="text-xs text-gray-600 mt-2 capitalize">{color}</span>
+              <span className="text-xs text-gray-600 mt-2 capitalize">
+                {color}
+              </span>
             </div>
           ))}
         </div>
@@ -73,7 +100,7 @@ export default function CapsuleOutput() {
                       <div
                         key={cIdx}
                         className="w-6 h-6 rounded-full border border-gray-300"
-                        style={{ backgroundColor: color.toLowerCase() }}
+                        style={{ backgroundColor: getColorHex(color) }}
                         title={color}
                       />
                     ))}

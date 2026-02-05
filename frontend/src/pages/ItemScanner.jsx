@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState } from "react"
+import axios from "axios"
+import { API_BASE } from "../lib/api"
 
 export default function ItemScanner() {
-  const [inputType, setInputType] = useState('link') // 'link' or 'manual'
+  const [inputType, setInputType] = useState("link")
   const [formData, setFormData] = useState({
-    product_link: '',
-    product_description: '',
-    price: '',
-    brand: '',
+    product_link: "",
+    product_description: "",
+    price: "",
+    brand: "",
   })
   const [analysis, setAnalysis] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setError(null)
     setLoading(true)
 
     try {
-      const payload = inputType === 'link'
-        ? { product_link: formData.product_link }
-        : {
-            product_description: formData.product_description,
-            price: formData.price ? parseFloat(formData.price) : null,
-            brand: formData.brand,
-          }
+      const payload =
+        inputType === "link"
+          ? { product_link: formData.product_link }
+          : {
+              product_description: formData.product_description,
+              price: formData.price ? parseFloat(formData.price) : null,
+              brand: formData.brand,
+            }
 
-      const response = await axios.post('http://localhost:8000/api/analyze-item', payload)
+      const response = await axios.post(
+        `${API_BASE}/api/analyze-item`,
+        payload
+      )
       setAnalysis(response.data)
-    } catch (error) {
-      console.error('Error analyzing item:', error)
-      alert('Error analyzing item. Please try again.')
+    } catch (err) {
+      console.error("Error analyzing item:", err)
+      setError(
+        err.response?.data?.detail || "Could not analyze item. Try again."
+      )
     } finally {
       setLoading(false)
     }
@@ -148,12 +157,25 @@ export default function ItemScanner() {
             </>
           )}
 
+          {error && (
+            <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm">
+              {error}
+            </div>
+          )}
+
           <button
             type="submit"
             disabled={loading}
             className="w-full bg-primary-600 text-white py-3 px-4 rounded-md font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Analyzing...' : 'Analyze Item'}
+            {loading ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                Analyzing...
+              </span>
+            ) : (
+              "Analyze Item"
+            )}
           </button>
         </form>
       </div>
@@ -216,8 +238,10 @@ export default function ItemScanner() {
                 {analysis.alternatives.map((alt, idx) => (
                   <div key={idx} className="bg-gray-50 p-4 rounded-lg">
                     <div className="font-semibold">{alt.brand} - {alt.name}</div>
-                    <div className="text-primary-600">${alt.price?.toFixed(2)}</div>
-                    {alt.reason && (
+                    <div className="text-primary-600">
+                      {alt.price != null ? `$${Number(alt.price).toFixed(2)}` : alt.reason || ""}
+                    </div>
+                    {alt.reason && alt.price != null && (
                       <div className="text-sm text-gray-600 mt-1">{alt.reason}</div>
                     )}
                   </div>

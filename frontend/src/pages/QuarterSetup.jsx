@@ -1,33 +1,44 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { API_BASE } from "../lib/api"
 
 export default function QuarterSetup() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    quarter: 'Q1',
-    climate: 'moderate',
+    quarter: "Q1",
+    climate: "moderate",
     style_keywords: [],
     budget: 1000,
     shopping_preferences: [],
   })
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const styleOptions = ['effortless', 'elevated', 'sexy', 'minimal', 'classic']
   const brandOptions = ['Everlane', 'Aritzia', 'Zara', 'Reformation', 'Madewell']
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setError(null)
+    if (formData.style_keywords.length === 0) {
+      setError("Select at least one style keyword.")
+      return
+    }
     setLoading(true)
 
     try {
-      const response = await axios.post('http://localhost:8000/api/generate-capsule', formData)
-      // Store capsule data (in real app, use state management)
-      localStorage.setItem('capsule', JSON.stringify(response.data))
-      navigate('/capsule')
-    } catch (error) {
-      console.error('Error generating capsule:', error)
-      alert('Error generating capsule. Please try again.')
+      const response = await axios.post(
+        `${API_BASE}/api/generate-capsule`,
+        formData
+      )
+      localStorage.setItem("capsule", JSON.stringify(response.data))
+      navigate("/capsule")
+    } catch (err) {
+      console.error("Error generating capsule:", err)
+      setError(
+        err.response?.data?.detail || "Could not generate capsule. Try again."
+      )
     } finally {
       setLoading(false)
     }
@@ -152,13 +163,25 @@ export default function QuarterSetup() {
           </div>
         </div>
 
-        {/* Submit */}
+        {error && (
+          <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm">
+            {error}
+          </div>
+        )}
+
         <button
           type="submit"
           disabled={loading || formData.style_keywords.length === 0}
           className="w-full bg-primary-600 text-white py-3 px-4 rounded-md font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? 'Generating Capsule...' : 'Generate Capsule'}
+          {loading ? (
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              Generating...
+            </span>
+          ) : (
+            "Generate Capsule"
+          )}
         </button>
       </form>
     </div>

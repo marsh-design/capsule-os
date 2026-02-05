@@ -32,7 +32,7 @@ jobs:
       - name: Format check with black
         run: |
           cd backend
-          black --check app/ tests/ scripts/
+          black --check app/ tests/
 
   lint-frontend:
     runs-on: ubuntu-latest

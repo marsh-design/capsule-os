@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import QuarterSetup from './pages/QuarterSetup'
 import CapsuleOutput from './pages/CapsuleOutput'
 import ItemScanner from './pages/ItemScanner'
+import Browse from './pages/Browse'
 import Layout from './components/Layout'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<QuarterSetup />} />
           <Route path="/capsule" element={<CapsuleOutput />} />
           <Route path="/scanner" element={<ItemScanner />} />
+          <Route path="/browse" element={<Browse />} />
         </Routes>
       </Layout>
     </Router>

@@ -12,7 +12,8 @@
       "material": "organic_cotton",
       "care": "machine_wash",
       "fit": "relaxed"
-    }
+    },
+    "link": "https://www.everlane.com"
   },
   {
     "id": 2,
@@ -27,7 +28,8 @@
       "material": "nylon_spandex",
       "care": "hand_wash",
       "fit": "fitted"
-    }
+    },
+    "link": "https://www.aritzia.com"
   },
   {
     "id": 3,
@@ -42,7 +44,8 @@
       "material": "polyester_cotton",
       "care": "dry_clean",
       "fit": "oversized"
-    }
+    },
+    "link": "https://www.zara.com"
   },
   {
     "id": 4,
@@ -57,7 +60,8 @@
       "material": "cotton_elastane",
       "care": "machine_wash",
       "fit": "straight"
-    }
+    },
+    "link": "https://www.everlane.com"
   },
   {
     "id": 5,
@@ -72,7 +76,8 @@
       "material": "linen_viscose",
       "care": "machine_wash",
       "fit": "wide_leg"
-    }
+    },
+    "link": "https://www.aritzia.com"
   },
   {
     "id": 6,
@@ -87,7 +92,8 @@
       "material": "leather",
       "care": "polish",
       "fit": "true_to_size"
-    }
+    },
+    "link": "https://www.everlane.com"
   },
   {
     "id": 7,
@@ -102,7 +108,8 @@
       "material": "synthetic_leather",
       "care": "wipe_clean",
       "fit": "true_to_size"
-    }
+    },
+    "link": "https://www.zara.com"
   },
   {
     "id": 8,
@@ -117,7 +124,8 @@
       "material": "polyester",
       "care": "dry_clean",
       "fit": "fitted"
-    }
+    },
+    "link": "https://www.aritzia.com"
   },
   {
     "id": 9,
@@ -132,7 +140,8 @@
       "material": "recycled_polyester",
       "care": "spot_clean",
       "fit": "one_size"
-    }
+    },
+    "link": "https://www.everlane.com"
   },
   {
     "id": 10,
@@ -147,6 +156,7 @@
       "material": "polyester_wool",
       "care": "dry_clean",
       "fit": "oversized"
-    }
+    },
+    "link": "https://www.zara.com"
   }
 ]

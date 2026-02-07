@@ -60,6 +60,7 @@ class Product(Base):
     description = Column(Text)
     colors = Column(JSON)  # Array of colors
     image_url = Column(String)
+    link = Column(String)  # Optional shop URL (brand site, product page, etc.)
     product_metadata = Column(JSON)  # Additional product data (renamed from metadata)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -91,6 +92,19 @@ class ReviewInsight(Base):
 def init_db():
     """Initialize database tables"""
     Base.metadata.create_all(bind=engine)
+    # Add 'link' column to products if missing (e.g. after pulling new code)
+    if DATABASE_URL.startswith("sqlite"):
+        from sqlalchemy import text
+
+        with engine.connect() as conn:
+            try:
+                conn.execute(text("SELECT link FROM products LIMIT 1"))
+            except Exception:
+                try:
+                    conn.execute(text("ALTER TABLE products ADD COLUMN link VARCHAR"))
+                    conn.commit()
+                except Exception:
+                    pass
 
 
 def get_db():

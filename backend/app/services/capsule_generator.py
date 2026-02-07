@@ -9,7 +9,6 @@ from app.models import (
     ItemOption,
     Quarter,
     Climate,
-    StyleKeyword,
 )
 from app.services.scoring import CapsuleScorer
 from app.services.cache import capsule_cache
@@ -108,19 +107,20 @@ class CapsuleGenerator:
         self,
         quarter: Quarter,
         climate: Climate,
-        style_keywords: List[StyleKeyword],
+        style_descriptors: List[str],
         budget: float,
         shopping_preferences: List[str],
         closet_items: List[Dict[str, Any]],
     ) -> CapsuleResponse:
         """
-        Generate capsule wardrobe with caching
+        Generate capsule wardrobe with caching.
+        style_descriptors: refined from user's "three words" or legacy keywords.
         """
         # Create cache key from request parameters
         cache_key_data = {
             "quarter": quarter.value,
             "climate": climate.value,
-            "style_keywords": [kw.value for kw in style_keywords],
+            "style_descriptors": sorted(style_descriptors),
             "budget": budget,
             "shopping_preferences": sorted(shopping_preferences),
             # Note: closet_items excluded from cache key for now
@@ -133,7 +133,7 @@ class CapsuleGenerator:
             logger.info(f"Returning cached capsule for {quarter}")
             return cached_result
 
-        logger.info(f"Generating {quarter} capsule for {climate} climate")
+        logger.info(f"Generating {quarter} capsule for {climate} climate, style: {style_descriptors}")
 
         # Get base template
         template_key = str(quarter.value)
@@ -143,7 +143,7 @@ class CapsuleGenerator:
         items = await self._generate_items(
             template=template,
             climate=climate,
-            style_keywords=style_keywords,
+            style_descriptors=style_descriptors,
             budget=budget,
             shopping_preferences=shopping_preferences,
             closet_items=closet_items,
@@ -175,12 +175,12 @@ class CapsuleGenerator:
         self,
         template: Dict,
         climate: Climate,
-        style_keywords: List[StyleKeyword],
+        style_descriptors: List[str],
         budget: float,
         shopping_preferences: List[str],
         closet_items: List[Dict[str, Any]],
     ) -> List[CapsuleItem]:
-        """Generate capsule items with best value/quality options from database"""
+        """Generate capsule items with best value/quality options from database."""
         db = SessionLocal()
         try:
             template_items = template.get("items", [])[:12]  # Limit to 12 items
@@ -245,6 +245,11 @@ class CapsuleGenerator:
                             ),
                             price=best_value.price if best_value else budget / 12 * 0.6,
                             image_url=best_value_image,
+                            link=(
+                                getattr(best_value, "link", None)
+                                if best_value
+                                else None
+                            ),
                             reason="Great quality-to-price ratio",
                         ),
                         best_quality=ItemOption(
@@ -260,6 +265,11 @@ class CapsuleGenerator:
                                 else budget / 12 * 1.4
                             ),
                             image_url=best_quality_image,
+                            link=(
+                                getattr(best_quality, "link", None)
+                                if best_quality
+                                else None
+                            ),
                             reason="Premium materials and construction",
                         ),
                         palette_colors=(

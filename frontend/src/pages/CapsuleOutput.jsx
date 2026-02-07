@@ -151,6 +151,16 @@ export default function CapsuleOutput() {
                     <p className="mt-2 text-black font-medium">
                       ${item.best_value.price.toFixed(2)}
                     </p>
+                    {item.best_value?.link && (
+                      <a
+                        href={item.best_value.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-2 text-[11px] font-medium tracking-wide uppercase text-neutral-500 hover:text-black"
+                      >
+                        View at {item.best_value.brand} →
+                      </a>
+                    )}
                   </div>
                   <div>
                     <p className="text-[11px] uppercase tracking-wide text-neutral-500 mb-1">
@@ -165,6 +175,16 @@ export default function CapsuleOutput() {
                     <p className="mt-2 text-black font-medium">
                       ${item.best_quality.price.toFixed(2)}
                     </p>
+                    {item.best_quality?.link && (
+                      <a
+                        href={item.best_quality.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-2 text-[11px] font-medium tracking-wide uppercase text-neutral-500 hover:text-black"
+                      >
+                        View at {item.best_quality.brand} →
+                      </a>
+                    )}
                   </div>
                 </div>
               </article>

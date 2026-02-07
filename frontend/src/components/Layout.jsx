@@ -28,6 +28,9 @@ export default function Layout({ children }) {
               <Link to="/capsule" className={linkClass("/capsule")}>
                 Capsule
               </Link>
+              <Link to="/browse" className={linkClass("/browse")}>
+                Browse
+              </Link>
               <Link to="/scanner" className={linkClass("/scanner")}>
                 Should I Buy
               </Link>

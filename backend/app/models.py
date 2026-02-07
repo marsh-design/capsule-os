@@ -2,7 +2,7 @@
 Pydantic models for request/response validation
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional, Dict, Any
 from enum import Enum
 
@@ -32,10 +32,21 @@ class StyleKeyword(str, Enum):
 class CapsuleRequest(BaseModel):
     quarter: Quarter
     climate: Climate
-    style_keywords: List[StyleKeyword] = Field(..., min_items=1, max_items=3)
+    # User's three words (e.g. "relaxed, minimal, French") — refined into style descriptors
+    style_three_words: Optional[str] = None
+    # Legacy: fixed style keywords (used if style_three_words not provided)
+    style_keywords: Optional[List[StyleKeyword]] = Field(None, min_items=0, max_items=5)
     budget: float = Field(..., gt=0, le=10000)
     shopping_preferences: List[str] = []  # Brand names
     closet_items: Optional[List[Dict[str, Any]]] = None
+
+    @model_validator(mode="after")
+    def require_style_input(self):
+        has_three = self.style_three_words and self.style_three_words.strip()
+        has_keywords = self.style_keywords and len(self.style_keywords) > 0
+        if not has_three and not has_keywords:
+            raise ValueError("Provide either style_three_words or style_keywords.")
+        return self
 
 
 class ItemOption(BaseModel):

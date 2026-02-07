@@ -8,28 +8,35 @@ export default function QuarterSetup() {
   const [formData, setFormData] = useState({
     quarter: "Q1",
     climate: "moderate",
-    style_keywords: [],
+    style_three_words: "",
     budget: 1000,
     shopping_preferences: [],
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const styleOptions = ["effortless", "elevated", "sexy", "minimal", "classic"]
   const brandOptions = ["Everlane", "Aritzia", "Zara", "Reformation", "Madewell"]
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
-    if (formData.style_keywords.length === 0) {
-      setError("Select at least one style keyword.")
+    const threeWords = (formData.style_three_words || "").trim()
+    if (!threeWords) {
+      setError("Describe your vibe in 3 words (e.g. relaxed, minimal, French).")
       return
     }
     setLoading(true)
     try {
+      const payload = {
+        quarter: formData.quarter,
+        climate: formData.climate,
+        style_three_words: threeWords,
+        budget: formData.budget,
+        shopping_preferences: formData.shopping_preferences,
+      }
       const response = await axios.post(
         `${API_BASE}/api/generate-capsule`,
-        formData
+        payload
       )
       localStorage.setItem("capsule", JSON.stringify(response.data))
       navigate("/capsule")
@@ -41,15 +48,6 @@ export default function QuarterSetup() {
     } finally {
       setLoading(false)
     }
-  }
-
-  const toggleStyleKeyword = (keyword) => {
-    setFormData((prev) => ({
-      ...prev,
-      style_keywords: prev.style_keywords.includes(keyword)
-        ? prev.style_keywords.filter((k) => k !== keyword)
-        : [...prev.style_keywords, keyword].slice(0, 3),
-    }))
   }
 
   const toggleBrand = (brand) => {
@@ -109,25 +107,24 @@ export default function QuarterSetup() {
         </div>
 
         <div>
-          <label className="block text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-4">
-            Style (select up to 3)
+          <label className="block text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-3">
+            Your vibe in 3 words
           </label>
-          <div className="flex flex-wrap gap-2">
-            {styleOptions.map((keyword) => (
-              <button
-                key={keyword}
-                type="button"
-                onClick={() => toggleStyleKeyword(keyword)}
-                className={`px-4 py-2 text-xs font-medium tracking-wide uppercase transition-colors ${
-                  formData.style_keywords.includes(keyword)
-                    ? "bg-black text-white"
-                    : "bg-stone-100 text-neutral-600 hover:bg-stone-200 hover:text-black"
-                }`}
-              >
-                {keyword}
-              </button>
-            ))}
-          </div>
+          <p className="text-xs text-neutral-500 mb-2">
+            Like Alison Bornstein: e.g. relaxed, minimal, French — we’ll refine these into specific style cues.
+          </p>
+          <input
+            type="text"
+            value={formData.style_three_words}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                style_three_words: e.target.value,
+              }))
+            }
+            placeholder="e.g. relaxed, minimal, French"
+            className="w-full bg-transparent border-b border-stone-300 py-3 text-black font-sans focus:border-black transition-colors placeholder:text-neutral-400"
+          />
         </div>
 
         <div>
@@ -180,7 +177,7 @@ export default function QuarterSetup() {
 
         <button
           type="submit"
-          disabled={loading || formData.style_keywords.length === 0}
+          disabled={loading || !formData.style_three_words.trim()}
           className="w-full bg-black text-white py-4 text-xs font-medium tracking-wide uppercase hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
         >
           {loading ? (

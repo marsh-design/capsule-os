@@ -10,7 +10,7 @@ from loguru import logger
 import os
 from dotenv import load_dotenv
 
-from app.routers import capsule, analyze, closet
+from app.routers import capsule, analyze, closet, products
 from app.database import init_db
 
 load_dotenv()
@@ -34,6 +34,7 @@ app.add_middleware(
 app.include_router(capsule.router, prefix="/api", tags=["capsule"])
 app.include_router(analyze.router, prefix="/api", tags=["analyze"])
 app.include_router(closet.router, prefix="/api/closet", tags=["closet"])
+app.include_router(products.router, prefix="/api", tags=["products"])
 
 
 @app.on_event("startup")

@@ -23,12 +23,7 @@ def list_products(
         if category:
             q = q.filter(Product.category == category)
         total = q.count()
-        products = (
-            q.order_by(Product.id)
-            .offset(offset)
-            .limit(limit)
-            .all()
-        )
+        products = q.order_by(Product.id).offset(offset).limit(limit).all()
         return {
             "products": [
                 {

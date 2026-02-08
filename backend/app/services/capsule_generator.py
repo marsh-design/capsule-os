@@ -133,7 +133,9 @@ class CapsuleGenerator:
             logger.info(f"Returning cached capsule for {quarter}")
             return cached_result
 
-        logger.info(f"Generating {quarter} capsule for {climate} climate, style: {style_descriptors}")
+        logger.info(
+            f"Generating {quarter} capsule for {climate} climate, style: {style_descriptors}"
+        )
 
         # Get base template
         template_key = str(quarter.value)

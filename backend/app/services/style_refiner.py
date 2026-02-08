@@ -11,7 +11,14 @@ from typing import List
 STYLE_EXPANSION = {
     "relaxed": ["relaxed", "comfortable", "easy", "unfussy", "lived-in"],
     "minimal": ["minimal", "clean", "simple", "understated", "quiet luxury"],
-    "french": ["effortless", "classic", "neutral", "timeless", "understated", "quality basics"],
+    "french": [
+        "effortless",
+        "classic",
+        "neutral",
+        "timeless",
+        "understated",
+        "quality basics",
+    ],
     "elevated": ["elevated", "polished", "refined", "intentional", "put-together"],
     "sexy": ["sexy", "fitted", "confident", "bold", "statement"],
     "classic": ["classic", "timeless", "traditional", "wardrobe staples", "versatile"],

@@ -72,6 +72,8 @@ class CapsuleResponse(BaseModel):
     outfit_formulas: List[str]
     items: List[CapsuleItem]
     do_not_buy: List[str]  # Items to avoid
+    # Coherence score: palette + versatility + overlap (0-1)
+    coherence_scores: Optional[Dict[str, float]] = None
 
 
 class AnalyzeItemRequest(BaseModel):

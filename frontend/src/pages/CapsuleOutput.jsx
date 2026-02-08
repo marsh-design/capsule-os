@@ -53,9 +53,22 @@ export default function CapsuleOutput() {
         <p className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 mb-2">
           Your capsule
         </p>
-        <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-black">
-          {capsule.quarter}
-        </h1>
+        <div className="flex flex-wrap items-baseline gap-6">
+          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-black">
+            {capsule.quarter}
+          </h1>
+          {capsule.coherence_scores != null && (
+            <span
+              className="text-sm text-neutral-600 font-sans"
+              title={`Palette match: ${(capsule.coherence_scores.palette_score * 100).toFixed(0)}% · Versatility: ${(capsule.coherence_scores.versatility_score * 100).toFixed(0)}% · Closet overlap: ${(capsule.coherence_scores.overlap_score * 100).toFixed(0)}%`}
+            >
+              Capsule Coherence Score:{" "}
+              <span className="font-medium text-black">
+                {(capsule.coherence_scores.total_score ?? 0).toFixed(2)}
+              </span>
+            </span>
+          )}
+        </div>
       </header>
 
       {/* Palette */}

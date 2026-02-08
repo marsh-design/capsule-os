@@ -160,12 +160,21 @@ class CapsuleGenerator:
         # Compute do_not_buy list
         do_not_buy = self._compute_do_not_buy(closet_items, items)
 
+        # Compute coherence scores (palette + versatility + overlap)
+        score_input = [
+            {"colors": item.palette_colors, "category": item.category} for item in items
+        ]
+        coherence_scores = self.scorer.score_capsule(
+            score_input, palette, closet_items or []
+        )
+
         result = CapsuleResponse(
             quarter=quarter.value,
             palette=palette,
             outfit_formulas=outfit_formulas,
             items=items,
             do_not_buy=do_not_buy,
+            coherence_scores=coherence_scores,
         )
 
         # Cache the result

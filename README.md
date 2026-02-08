@@ -15,6 +15,30 @@ CapsuleOS helps you plan a cohesive quarterly capsule wardrobe and avoid low-val
 - price-per-wear
 - review-derived fit/value signals
 
+## System Status (Honest Snapshot)
+
+CapsuleOS is intentionally built in stages. Below is a clear view of what is production-ready today vs. what is currently mocked or heuristic-based.
+
+### ✅ Fully Implemented
+- End-to-end capsule generation using real product data (SQLite)
+- Palette extraction, versatility scoring, overlap penalties
+- Capsule caching (1h TTL)
+- "Should I Buy This?" decision flow (heuristic-based)
+- Alternatives retrieval from DB (price-range + category)
+- Structured APIs, validation, health checks
+- CI (lint, format, tests)
+
+### ⚠️ Heuristic / Mocked (by design)
+- Review insights (rule-based placeholder; ML planned)
+- Product link parsing (URL accepted but not fetched yet)
+- Closet overlap (API exists, UI not wired)
+
+### 🚧 In Progress / Planned
+- Review insights ML pipeline (aspect-based sentiment)
+- Vector search for similar-item alternatives
+- Real product-link parsing
+- Evaluation harness + metrics
+
 ## MVP Features
 
 - [x] Quarter setup (style keywords, budget, climate)
@@ -88,16 +112,18 @@ cd frontend && npm run dev
 
 Frontend: http://localhost:5173 (Vite) or http://localhost:3000 — proxy forwards `/api` to backend:8000.
 
-**Docker:** `docker-compose up` (see SETUP.md for details).
+**Docker:** `cp backend/.env.example backend/.env` then `docker-compose up`. Frontend: http://localhost:3000, Backend: http://localhost:8000.
+
+**Troubleshooting:** Backend won’t start — check Python 3.10+, `pip install -r requirements.txt`. Frontend can’t reach backend — ensure backend on 8000 and CORS allows localhost:3000/5173. DB issues — delete the SQLite file in `backend/` and re-run `python scripts/seed_db.py`.
 
 ## Project Structure
 
 ```
-ai_stylist/               # or your repo name
+ai_stylist/
 ├── frontend/            # React + Vite + Tailwind
 ├── backend/             # FastAPI, routers, services, DB
 ├── data/                # Sample products, reviews, capsule templates, schema
-├── docs/                # STATUS, PRD, ARCHITECTURE, checklists
+├── docs/                # STATUS (what works / what doesn’t)
 ├── eval/                # Evaluation harness (placeholder)
 └── docker-compose.yml
 ```

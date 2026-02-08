@@ -1,5 +1,8 @@
 """
 Review analysis service - Extract insights from product reviews
+
+NOTE: Rule-based placeholder. Replaced by ML pipeline in Week 4.
+TODO: Aspect-based sentiment; fit/quality extraction from real reviews; optional LLM for summarization.
 """
 
 from loguru import logger

@@ -77,8 +77,10 @@ class ItemAnalyzer:
         )
 
     async def _extract_from_link(self, link: str) -> Dict[str, Any]:
-        """Extract product info from URL (MVP: basic parsing)"""
-        # TODO: Implement actual web scraping or use product API
+        """Extract product info from URL (MVP: basic parsing).
+        NOTE: Product link is not fetched or parsed yet. Placeholder returns generic info.
+        TODO: Fetch URL, parse product page or integrate product API (e.g. affiliate/retailer).
+        """
         return {
             "link": link,
             "brand": "Unknown",

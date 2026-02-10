@@ -75,7 +75,7 @@ npm run dev
 - [x] Week 3: Scanner v1 (UI + API, heuristic-based)
 - [ ] Week 4: Review insights extractor (real ML/NLP)
 - [x] Week 5: Ranking + alternatives (DB-backed alternatives)
-- [ ] Week 6: Evaluation + polish + deploy
+- [ ] Week 6: Evaluation + polish + deploy (eval harness skeleton in place)
 
 ## Setup
 
@@ -115,6 +115,8 @@ Frontend: http://localhost:5173 (Vite) or http://localhost:3000 — proxy forwar
 **Docker:** `cp backend/.env.example backend/.env` then `docker-compose up`. Frontend: http://localhost:3000, Backend: http://localhost:8000.
 
 **Troubleshooting:** Backend won’t start — check Python 3.10+, `pip install -r requirements.txt`. Frontend can’t reach backend — ensure backend on 8000 and CORS allows localhost:3000/5173. DB issues — delete the SQLite file in `backend/` and re-run `python scripts/seed_db.py`.
+
+**Evaluation:** From repo root, run `python eval/run_eval.py` (uses in-process TestClient; no server needed). Reports pass/fail for capsule and scanner API contracts.
 
 ## Project Structure
 
@@ -175,6 +177,8 @@ CapsuleOS generates personalized quarterly capsules through a multi-step process
 - [x] Unit tests for scoring & caching
 - [x] CI/CD pipeline (lint, format, tests)
 - [x] API health check endpoint
+- [x] Evaluation harness skeleton (`eval/run_eval.py`)
+- [x] Edit setup from capsule page (back to Quarter Setup)
 
 ### 🚧 In Progress
 - [ ] Review insights extractor (real ML; currently rule-based)
@@ -182,7 +186,7 @@ CapsuleOS generates personalized quarterly capsules through a multi-step process
 
 ### 📋 Planned
 - [ ] Vector search for similar-item alternatives
-- [ ] Evaluation harness
+- [ ] Evaluation metrics (verdict accuracy, consistency)
 - [ ] Production deployment
 - [ ] Real product-link parsing (scanner)
 

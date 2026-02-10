@@ -6,6 +6,7 @@
 - Submit quarter (Q1–Q4), climate, style keywords, budget, and preferred brands.
 - Form calls `POST /api/generate-capsule`; response is saved to `localStorage` and user is redirected to the capsule page.
 - In-page validation: “Select at least one style keyword” if none selected. API uses relative `/api` (Vite proxy in dev).
+- From capsule page, “Edit setup” link returns to Quarter Setup to change inputs and regenerate.
 
 **Capsule Output (`/capsule`)**
 - Reads capsule from `localStorage`.
@@ -41,6 +42,7 @@
 - Frontend: React + Vite + Tailwind; 4 routes (Quarter Setup, Capsule, Browse, Scanner).
 - Backend: FastAPI, Pydantic models, structured JSON responses.
 - CI: lint (flake8), format (black), tests (pytest). Docker Compose available.
+- Evaluation harness: `python eval/run_eval.py` (from repo root) runs capsule + scanner test cases and reports pass/fail.
 
 ---
 

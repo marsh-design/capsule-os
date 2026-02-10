@@ -57,6 +57,12 @@ export default function CapsuleOutput() {
           <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-black">
             {capsule.quarter}
           </h1>
+          <Link
+            to="/"
+            className="text-[11px] font-medium tracking-wide uppercase text-neutral-500 hover:text-black border-b border-transparent hover:border-black transition-colors"
+          >
+            Edit setup
+          </Link>
           {capsule.coherence_scores != null && (
             <span
               className="text-sm text-neutral-600 font-sans"
